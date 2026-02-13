@@ -16,7 +16,7 @@ const store = new mongodbStore({
   collection: 'sessions'
 })
 
-const port = 3000
+const port = process.env.PORT
 
 store.on('error', function(error) {
   console.error('Session store error:', error)
