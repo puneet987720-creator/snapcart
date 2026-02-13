@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const session = require('express-session')
 const mongodbStore = require('connect-mongodb-session')(session)
-const db_path = 'mongodb+srv://puneet987720_db_user:Puneet108@e-commerce.yffoapx.mongodb.net/snapCart?appName=e-commerce'
+const db_path = process.env.DATA_URL
 const {default:mongoose} = require('mongoose')
 const bodyParser = require('body-parser')
 const mongodb = require('mongodb')
