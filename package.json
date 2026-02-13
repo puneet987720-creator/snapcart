@@ -1,0 +1,36 @@
+{
+  "name": "snapcart",
+  "version": "1.0.0",
+  "description": "this is my e-commerce site",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puneet987720-creator/snapcart.git"
+  },
+  "author": "Puneet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puneet987720-creator/snapcart/issues"
+  },
+  "homepage": "https://github.com/puneet987720-creator/snapcart#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.2",
+    "connect-mongodb-session": "^5.0.0",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.1.0",
+    "mongoose": "^9.1.6",
+    "multer": "^2.0.2",
+    "nodemailer": "^8.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
