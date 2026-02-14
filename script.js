@@ -10,13 +10,14 @@ const bodyParser = require('body-parser')
 const mongodb = require('mongodb')
 
 const authRoutes = require('./routes/authroutes')
+const productRoutes = require('./routes/productroutes')
 
 const store = new mongodbStore({
   uri: db_path,
   collection: 'sessions'
 })
 
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 
 store.on('error', function(error) {
   console.error('Session store error:', error)
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(authRoutes)
+app.use(productRoutes)
 
 mongoose.connect(db_path).then(() => {
   console.log('Connected to MongoDB')
