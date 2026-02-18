@@ -11,6 +11,7 @@ const mongodb = require('mongodb')
 
 const authRoutes = require('./routes/authroutes')
 const productRoutes = require('./routes/productroutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 const store = new mongodbStore({
   uri: db_path,
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 
 app.use(authRoutes)
 app.use(productRoutes)
+app.use(orderRoutes)
 
 mongoose.connect(db_path).then(() => {
   console.log('Connected to MongoDB')
