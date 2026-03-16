@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config()
 const session = require('express-session')
@@ -33,6 +34,14 @@ app.use(session({
   saveUninitialized: false,
   store: store
 }))
+
+app.use(cors(
+  {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true 
+  }
+))
 
 app.get('/', (req, res) => { 
   res.send('Hello World!')

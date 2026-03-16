@@ -16,7 +16,7 @@ let mailOptions = {
     from: process.env.MAIL_USER,
     to: email,
     subject: 'Verify your email',
-    text: `Please click on the following link to verify your email: http://localhost:3000/verify-email/${token}`
+    text: `Please click on the following link to verify your email: http://localhost:5173/verify-email/${token}`
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
