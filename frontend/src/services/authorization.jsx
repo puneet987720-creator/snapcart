@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API = axios.create({
     baseURL: 'http://localhost:3000',
+    withCredentials: true
 });
 
 export const createUser = async (userData) => {
@@ -16,4 +17,14 @@ export const verifyEmail = async (token) => {
         }
     });
     return response.data;
+}
+
+export const loginUser = async (credentials) => {
+    const response = await API.post('/login', credentials);
+    return response.data;
+}
+
+export const checkLoginStatus = async () => {
+    const response = await API.get('/loginStatus');
+    return response;
 }

@@ -115,6 +115,10 @@ exports.postlogin = async (req, res) => {
     }
 }
 
+exports.loginStatus = (req, res) => {
+    res.status(200).json({ isLoggedIn: req.session.isLoggedIn || false, user: req.session.auth || null })
+}
+
 exports.logout = (req, res) => {
     console.log(req.body)
     req.session.destroy(err => {

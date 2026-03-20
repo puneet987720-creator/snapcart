@@ -6,6 +6,7 @@ router.post('/register', authController.postregister);
 router.post('/verify', authController.verifyEmail);
 router.post('/reVerify', authController.reVerifyEmail);
 router.post('/login', authController.postlogin);
+router.get('/loginStatus', authController.loginStatus);
 router.post('/logout', authController.logout);
 
 

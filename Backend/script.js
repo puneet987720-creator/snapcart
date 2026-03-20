@@ -32,7 +32,11 @@ app.use(session({
   secret: 'e-commerce site',
   resave: false,
   saveUninitialized: false,
-  store: store
+  store: store,
+   cookie: {
+    secure: false, // must be true if using HTTPS
+    httpOnly: true // prevents JS access
+  }
 }))
 
 app.use(cors(

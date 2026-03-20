@@ -4,32 +4,50 @@ import { createUser } from "../../services/authorization";
 export function SignupForm() {
   return (
     <Form method="POST" >
-     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-  <div className="card bg-base-100 w-[28rem] shadow-sm">
-    <div className="card-body">
-      <h2 className="card-title">Signup</h2>
-      <fieldset className="fieldset">
-        <legend className="fieldset-legend">First Name</legend>
-        <input type="text" name="firstname" className="input input-bordered" placeholder="Required" />
+     <div className="hero bg-base-200 min-h-screen">
+  <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="text-center lg:text-left">
+      <h1 className="text-5xl font-bold">Create Account</h1>
+    </div>
+    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+      <div className="card-body">
+        <fieldset className="fieldset">
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label className="label">First Name</label>
+              <input type="text" name="firstname" className="input" placeholder="Required" />
+            </div>
+            <div className="flex-1">
+              <label className="label">Last Name</label>
+              <input type="text" name="lastname" className="input" placeholder="Optional" />
+            </div>
+          </div>
 
-        <legend className="fieldset-legend">Last Name</legend>
-        <input type="text" name="lastname" className="input input-bordered" placeholder="Optional" />
+          <label className="label">Email</label>
+          <input type="email" name="email" className="input" placeholder="Required" />
 
-        <legend className="fieldset-legend">Email</legend>
-        <input type="email" name="email" className="input input-bordered" placeholder="Required" />
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <label className="label">Password</label>
+              <input type="password" name="password" className="input" placeholder="Required" />
+            </div>
+            <div className="flex-1">
+              <label className="label">Confirm Password</label>
+              <input type="password" className="input" placeholder="Required" />
+            </div>
+          </div>
 
-        <legend className="fieldset-legend">Password</legend>
-        <input type="password" name="password" className="input input-bordered" placeholder="Required" />
-
-        <legend className="fieldset-legend">Confirm Password</legend>
-        <input type="password" className="input input-bordered" placeholder="Required" />
-
-        <legend className="fieldset-legend">User Type</legend>
-        <input type="text" name="usertype" value="admin" className="input input-bordered" placeholder="Required" />
-      </fieldset>
-
-      <div className="card-actions justify-end">
-        <button className="btn btn-primary">Signup</button> 
+              <label className="label">{`User Type(Required)`}</label>
+          <div className="flex gap-1">
+            <div className="flex">
+            <input type="checkbox" aria-label="Customer" name="customer" className="btn" />
+            </div>
+            <div className="flex">
+          <input type="checkbox" aria-label="Admin" name="admin" className="btn" />
+            </div>
+          </div>          
+          <button className="btn btn-neutral mt-4">Signup</button>
+        </fieldset>
       </div>
     </div>
   </div>
