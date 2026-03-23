@@ -35,9 +35,8 @@ export async function loginUserAction({ request }) {
   try {
     const response = await loginUser(data);
     console.log('User logged in successfully:', response.data);
-
+    return redirect("/");
   } catch (error) {
     console.error('Error logging in user:', error);
   }
-  return redirect("/"); 
 }

@@ -6,3 +6,7 @@ const API = axios.create({
 });
 
 export const fetchProducts = () => API.get('/all');
+
+export const fetchProductById = (id) => API.get(`/details/${id}`);
+
+export const addProduct = (productData) => API.post('/add', productData);

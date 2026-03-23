@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { LoginStateStore } from "../../Store/loginState-store"
+import { logoutUser } from "../../services/authorization";
 
 export function Navbar() {
   const { IsLoggedIn } = useContext(LoginStateStore);
   console.log('Navbar - Is user logged in?', IsLoggedIn);
+  const handleClick = () => {
+    window.location.reload(); // Reloads the entire page
+  };
   return (
     <>
-    <div className="navbar bg-base-100 fixed top-0 left-0 right-0 shadow-sm z-50">
+      <div className="navbar bg-base-100 fixed top-0 left-0 right-0 shadow-sm z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -15,8 +19,8 @@ export function Navbar() {
             <ul
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              {!IsLoggedIn ? <li><a href="/login">Login</a></li> : <li><a href="/">Home</a></li>}
-              {!IsLoggedIn ? <li><a href="/signup">Signup</a></li> : <li><a href="/">Home</a></li>}                
+              {!IsLoggedIn ? <li><a href="/login">Login</a></li> : <li><a href="/product">Home</a></li>}
+              {!IsLoggedIn ? <li><a href="/signup">Signup</a></li> : <li><a href="/">My orders</a></li>}
             </ul>
           </div>
         </div>
@@ -47,7 +51,21 @@ export function Navbar() {
                     </a>
                   </li>
                   <li><a>Settings</a></li>
-                  <li><a>Logout</a></li>
+                  <li>
+                    <a onClick={() => document.getElementById('my_modal_5').showModal()}>Logout</a>
+                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <p className="py-4">Are you sure you want to logout?</p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">cancel</button>
+                            <button className="btn btn-primary" onClick={async () => await logoutUser().then(() => handleClick())}>Logout</button>
+                          </form>
+                        </div>
+                      </div>
+                    </dialog></li>
                 </ul>
               </div>
             )}

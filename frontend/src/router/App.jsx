@@ -5,10 +5,6 @@ import { LoginStateStoreProvider } from '../Store/loginState-store';
 import {fetchProducts} from '../services/poducts';
 
 function App() {
-  // useEffect(() => {
-  //   fetchProducts().then(res => console.log(res.data))
-  //   .catch(err => console.error(err));
-  // }, [])
   return (
     <LoginStateStoreProvider>
       <div>

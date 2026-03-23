@@ -24,6 +24,11 @@ export const loginUser = async (credentials) => {
     return response.data;
 }
 
+export const logoutUser = async () => {
+    const response = await API.post('/logout');
+    return response
+}
+
 export const checkLoginStatus = async () => {
     const response = await API.get('/loginStatus');
     return response;
