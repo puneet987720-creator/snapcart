@@ -1,5 +1,8 @@
 import { ShowProduct } from "../components/Products.jsx/showProduct";
 import { ProductDetail } from "../components/Products.jsx/ProductDetail";
+import { createProductAction } from "../components/Products.jsx/addProducts";
+import { AddProductForm } from "../components/Products.jsx/addProducts";
+import { ProfilePage } from "../components/pages/profilePage";
 
 export const productRoutes = [
     {
@@ -9,5 +12,14 @@ export const productRoutes = [
     {
         path: "/product/:id",
         element: <ProductDetail />,
+    },
+    {
+        path: "/product/new",
+        element: <AddProductForm />,
+        action: createProductAction,
+    },
+    {
+        path: "/profilePage",
+        element: <ProfilePage />
     }
 ]

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const products = require('../models/products')
+const Auth = require('../models/auth')
 const fs = require('fs')
 
 exports.addProduct = async (req, res) => {
@@ -14,6 +15,11 @@ exports.addProduct = async (req, res) => {
             stock
         })
         await newProduct.save()
+        const productId = newProduct._id
+        const userId = req.session.auth.id
+        const user = await Auth.findById(userId)
+       await user.userProducts.push(productId)
+        await user.save()
         res.status(201).json({ message: 'Product added successfully', product: newProduct })
     } catch (error) {
         res.status(500).json({ error: error.message })

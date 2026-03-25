@@ -40,10 +40,10 @@ export function SignupForm() {
               <label className="label">{`User Type(Required)`}</label>
           <div className="flex gap-1">
             <div className="flex">
-            <input type="checkbox" aria-label="Customer" name="customer" className="btn" />
+            <input type="checkbox" aria-label="Customer" name="usertype" value="customer" className="btn" />
             </div>
             <div className="flex">
-          <input type="checkbox" aria-label="Admin" name="admin" className="btn" />
+          <input type="checkbox" aria-label="Admin" name="usertype" value="admin" className="btn" />
             </div>
           </div>          
           <button className="btn btn-neutral mt-4">Signup</button>
@@ -51,7 +51,7 @@ export function SignupForm() {
       </div>
     </div>
   </div>
-</div>
+</div> 
 </Form>
   );
 }

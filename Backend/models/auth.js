@@ -22,6 +22,10 @@ const authSchema = new mongoose.Schema({
         enum: ['customer', 'admin'],
         required: true,
     },
+    userProducts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userProducts'
+    }],
     token:{
         type: String,
         default: null
