@@ -7,7 +7,7 @@ export const FilterProductStoreProvider = ({ children }) => {
     const [searchResults, setSearchResults] = useState([]);
     console.log('fromServer:', searchResults);
     return (
-        <FilterProductStore.Provider value={[ searchTerm, setSearchTerm, setSearchResults ]}>
+        <FilterProductStore.Provider value={[ searchTerm, setSearchTerm, setSearchResults, searchResults ]}>
             {children}
         </FilterProductStore.Provider>
     )

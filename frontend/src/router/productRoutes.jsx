@@ -3,6 +3,7 @@ import { ProductDetail } from "../components/Products.jsx/ProductDetail";
 import { createProductAction } from "../components/Products.jsx/addProducts";
 import { AddProductForm } from "../components/Products.jsx/addProducts";
 import { ProfilePage } from "../components/pages/profilePage";
+import { SearchProduct } from "../components/Products.jsx/SearchProduct";
 
 export const productRoutes = [
     {
@@ -21,5 +22,9 @@ export const productRoutes = [
     {
         path: "/profilePage",
         element: <ProfilePage />
+    },
+    {
+        path: "/search",
+        element: <SearchProduct />
     }
 ]

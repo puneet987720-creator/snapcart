@@ -1,18 +1,21 @@
 import { useContext } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Sidebar } from "./Sidebar";
 import { LoginStateStore } from "../../Store/loginState-store"
 import { FilterProductStore } from "../../Store/filterProduct-store";
 import { logoutUser } from "../../services/authorization";
 import { searchProducts } from "../../services/poducts";
 
 export function Navbar() {
+  const Navigate = useNavigate()
   const { IsLoggedIn } = useContext(LoginStateStore);
-  console.log('Navbar - Is user logged in?', IsLoggedIn);
-  const [ searchTerm, setSearchTerm, setSearchResults] = useContext(FilterProductStore);
-  const handleSearch = async(e) => {
+  const [ searchTerm, setSearchTerm, setSearchResults, searchResults] = useContext(FilterProductStore);
+  const handleSearch = async() => {
     const response = await searchProducts(searchTerm);
-   const searchResult= setSearchResults(response.data.products);
-    e.preventDefault();
+    const result = response.data.products;
+    setSearchResults(result);
+    Navigate(`/search?query=${searchTerm}`)
   }
   const handleLogoutClick = () => {
     window.location.reload(); // Reloads the entire page
@@ -21,17 +24,7 @@ export function Navbar() {
     <>
       <div className="navbar bg-base-100 fixed top-0 left-0 right-0 shadow-sm z-50">
         <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /> </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              {!IsLoggedIn ? <li><a href="/login">Login</a></li> : <li><a href="/product">Home</a></li>}
-              {!IsLoggedIn ? <li><a href="/signup">Signup</a></li> : <li><a href="/">My orders</a></li>}
-            </ul>
-          </div>
+          <Sidebar IsLoggedIn={IsLoggedIn} />
         </div>
         <div className="navbar-center">
           <div className="flex-1">
@@ -40,7 +33,7 @@ export function Navbar() {
         </div>
         <div className="navbar-end">
           <div className="flex gap-2">
-            <input type="text" onChange={(e)=>{setSearchTerm(e.target.value)}} onKeyDown={(e)=>e.key==='Enter' && handleSearch(e)} placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+            <input type="text" name="Search" onChange={(e)=>{setSearchTerm(e.target.value)}} onKeyDown={(e)=>e.key==='Enter' && handleSearch(e)} placeholder="Search" className="input input-bordered w-24 md:w-auto" />
             {IsLoggedIn && (
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">

@@ -22,9 +22,9 @@ export function ProductCard({product}){
         </figure>
         <div className="card-body p-4">
           {/* Product Name */}
-          <h2 className="card-title text-lg line-clamp-2">{product.name.toUpperCase()}</h2>
+          <h2 className="card-title text-lg line-clamp-2">{product.name}</h2>
           {/* Brand */}
-          <p className="text-sm font-semibold text-accent">{product.brand.toUpperCase()}</p>
+          <p className="text-sm font-semibold text-accent">{product.brand}</p>
 
           {/* Description - truncated */}
           <p className="text-sm text-gray-600 line-clamp-2">
@@ -33,8 +33,8 @@ export function ProductCard({product}){
 
           {/* Price Section */}
           <div className="flex items-center gap-2 mt-2">
-            <p className="text-2xl font-bold text-primary">₹{product.price.toLocaleString()}</p>
-            <p className="text-sm text-gray-400 line-through">₹{(product.price * 1.2).toLocaleString()}</p>
+            <p className="text-2xl font-bold text-primary">₹{product.price}</p>
+            <p className="text-sm text-gray-400 line-through">₹{(product.price * 1.2)}</p>
             <span className="badge badge-primary text-xs">20% off</span>
           </div>
 
