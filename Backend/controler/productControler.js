@@ -51,6 +51,35 @@ exports.getProductById = async (req, res) => {
     }
 }
 
+exports.getProductsByIds = async (req, res) => {
+  try {
+    const { ids } = req.body; // expecting { ids: ["id1", "id2", "id3"] }
+
+    // Validate input
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: 'Product IDs are required' });
+    }
+
+    // Validate each ID
+    const invalidIds = ids.filter(id => !mongoose.Types.ObjectId.isValid(id));
+    if (invalidIds.length > 0) {
+      return res.status(400).json({ message: 'Invalid product IDs', invalidIds });
+    }
+
+    // Fetch products
+    const productsList = await products.find({ _id: { $in: ids } });
+
+    if (!productsList || productsList.length === 0) {
+      return res.status(404).json({ message: 'No products found' });
+    }
+
+    res.status(200).json({ products: productsList });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 exports.deleteProduct = async (req, res) => {
     try {
         const id = req.params.id
@@ -105,19 +134,32 @@ exports.searchProducts = async (req, res) => {
 
 exports.filterProducts = async (req, res) => {
     try {
-        const { category, brand, minPrice, maxPrice } = req.query
-        const filterCriteria = {}
-        if (category) filterCriteria.category = category
-        if (brand) filterCriteria.brand = brand
+        const { category, brand, minPrice, maxPrice } = req.query;
+        const filterCriteria = {};
+
+        // Handle multiple categories
+        if (category) {
+            const categories = Array.isArray(category) ? category : category.split(",");
+            filterCriteria.category = { $in: categories };
+        }
+
+        // Handle multiple brands
+        if (brand) {
+            const brands = Array.isArray(brand) ? brand : brand.split(",");
+            filterCriteria.brand = { $in: brands };
+        }
+
+        // Handle price range
         if (minPrice || maxPrice) {
-            filterCriteria.price = {}
-            if (minPrice) filterCriteria.price.$gte = parseFloat(minPrice)
-            if (maxPrice) filterCriteria.price.$lte = parseFloat(maxPrice)
-        }   
-        const filteredProducts = await products.find(filterCriteria)
-        res.status(200).json({ products: filteredProducts })
+            filterCriteria.price = {};
+            if (minPrice) filterCriteria.price.$gte = parseFloat(minPrice);
+            if (maxPrice) filterCriteria.price.$lte = parseFloat(maxPrice);
+        }
+
+        const filteredProducts = await products.find(filterCriteria);
+        res.status(200).json({ products: filteredProducts });
     } catch (error) {
-        res.status(500).json({ error: error.message })
-    }  
-}
+        res.status(500).json({ error: error.message });
+    }
+};
 

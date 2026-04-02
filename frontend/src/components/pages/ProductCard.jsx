@@ -22,9 +22,9 @@ export function ProductCard({product}){
         </figure>
         <div className="card-body p-4">
           {/* Product Name */}
-          <h2 className="card-title text-lg line-clamp-2">{product.name}</h2>
+          <h2 className="card-title text-lg line-clamp-2">{product.name.toUpperCase()}</h2>
           {/* Brand */}
-          <p className="text-sm font-semibold text-accent">{product.brand}</p>
+          <p className="text-sm font-semibold text-accent">{product.brand.toUpperCase()}</p>
 
           {/* Description - truncated */}
           <p className="text-sm text-gray-600 line-clamp-2">

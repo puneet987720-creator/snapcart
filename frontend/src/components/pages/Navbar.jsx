@@ -10,8 +10,8 @@ import { searchProducts } from "../../services/poducts";
 export function Navbar() {
   const Navigate = useNavigate()
   const { IsLoggedIn } = useContext(LoginStateStore);
-  const [ searchTerm, setSearchTerm, setSearchResults, searchResults] = useContext(FilterProductStore);
-  const handleSearch = async() => {
+  const [searchTerm, setSearchTerm, searchResults, setSearchResults, filterResult, setFilterResult] = useContext(FilterProductStore);
+  const handleSearch = async () => {
     const response = await searchProducts(searchTerm);
     const result = response.data.products;
     setSearchResults(result);
@@ -33,7 +33,7 @@ export function Navbar() {
         </div>
         <div className="navbar-end">
           <div className="flex gap-2">
-            <input type="text" name="Search" onChange={(e)=>{setSearchTerm(e.target.value)}} onKeyDown={(e)=>e.key==='Enter' && handleSearch(e)} placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+            <input type="text" name="Search" onChange={(e) => { setSearchTerm(e.target.value) }} onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)} placeholder="Search" className="input input-bordered w-24 md:w-auto" />
             {IsLoggedIn && (
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -67,7 +67,8 @@ export function Navbar() {
                           </form>
                         </div>
                       </div>
-                    </dialog></li>
+                    </dialog>
+                  </li>
                 </ul>
               </div>
             )}

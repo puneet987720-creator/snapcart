@@ -13,3 +13,12 @@ export const fetchProductById = (id) => API.get(`/details/${id}`);
 export const addProduct = (productData) => API.post('/add', productData);
 
 export const searchProducts = (searchTerm) => API.get(`/search?query=${searchTerm}`);
+
+export const filterProduct = (categories, brand, minPrice, maxPrice) => API.get(`/filter`,{
+    params:{
+        category:categories,
+        brand:brand,
+        minPrice:minPrice,
+        maxPrice:maxPrice
+    }
+})

@@ -20,16 +20,12 @@ export function Sidebar({ IsLoggedIn }) {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                     <ul className="menu bg-gradient-to-b from-base-200 to-base-300 min-h-full w-80 p-4 shadow-lg rounded-r-xl">
-
                         {!IsLoggedIn ? <li><a className="flex items-center gap-2 rounded-md transition-transform duration-200 border border-base-300 shadow-md p-2 hover:bg-base-300 hover:shadow-lg hover:scale-105" href="/login"><span className="material-icons">Login</span></a></li> : <li><a className="flex items-center gap-2 rounded-md transition-transform duration-200 border border-base-300 shadow-md p-2 hover:bg-base-300 hover:shadow-lg hover:scale-105" href="/product"><span className="material-icons"> Home</span></a></li>}
-
+                        
                         {!IsLoggedIn ? <li><a className="flex items-center gap-2 rounded-md transition-transform duration-200 border border-base-300 shadow-md p-2 hover:bg-base-300 hover:shadow-lg hover:scale-105" href="/signup"><span className="material-icons"> Signup</span></a></li> : <li><a className="flex items-center gap-2 rounded-md transition-transform duration-200 border border-base-300 shadow-md p-2 hover:bg-base-300 hover:shadow-lg hover:scale-105" href="/"><span className="material-icons"> My orders</span></a></li>}
-
+                     <li><a className="flex items-center gap-2 rounded-md transition-transform duration-200 border border-base-300 shadow-md p-2 hover:bg-base-300 hover:shadow-lg hover:scale-105" href="/filter"><span className="material-icons">Filter</span></a></li>
                     </ul>
                 </div>
-
-
-
             </div>
         </>
     )
