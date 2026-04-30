@@ -22,3 +22,13 @@ export const filterProduct = (categories, brand, minPrice, maxPrice) => API.get(
         maxPrice:maxPrice
     }
 })
+
+export const addToCart = (productId, quantity = 1) => API.post('/cart/add', { productId, quantity });
+
+export const getCart = () => API.get('/getcart');
+
+export const updateCartItem = (productId, quantity) => API.put('/cart/update', { productId, quantity });
+
+export const removeFromCart = (productId) => API.delete(`/cart/remove/${productId}`);
+
+export const clearCart = () => API.delete('/cart/clear');

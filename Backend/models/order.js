@@ -28,12 +28,24 @@ const orderSchema = new mongoose.Schema({
     paymentInfo: {
         method:{
             type: String,
-            enum: ['credit_card', 'upi', 'cash_on_delivery'],
+            enum: ['credit_card', 'upi', 'cash_on_delivery', 'razorpay'],
             required: true
         },
         transactionId: {
             type: String,
             required: true
+        },
+        razorpayOrderId: {
+            type: String,
+            default: null
+        },
+        razorpayPaymentId: {
+            type: String,
+            default: null
+        },
+        razorpaySignature: {
+            type: String,
+            default: null
         }
 },
 deliveryAddress: {

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AddToCart } from "./addToCartButton";
 import { Sidebar } from "./Sidebar";
 import { LoginStateStore } from "../../Store/loginState-store"
 import { FilterProductStore } from "../../Store/filterProduct-store";
@@ -34,8 +35,11 @@ export function Navbar() {
         <div className="navbar-end">
           <div className="flex gap-2">
             <input type="text" name="Search" onChange={(e) => { setSearchTerm(e.target.value) }} onKeyDown={(e) => e.key === 'Enter' && handleSearch(e)} placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+
+            <AddToCart IsLoggedIn={IsLoggedIn} />
             {IsLoggedIn && (
               <div className="dropdown dropdown-end">
+
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
                     <img

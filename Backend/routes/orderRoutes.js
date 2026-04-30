@@ -3,6 +3,11 @@ const router = express.Router()
 
 const orderController = require('../controler/ordercontroler')
 
+// Payment endpoints
+router.post('/create-razorpay-order', orderController.createRazorpayOrder)
+router.post('/verify-payment', orderController.verifyPaymentAndCreateOrder)
+
+// Existing order endpoints
 router.post('/place', orderController.createOrder)
 router.get('/user/:userId', orderController.getUserOrders)
 router.get('/placed-order-detail/:orderId', orderController.getOrderById)

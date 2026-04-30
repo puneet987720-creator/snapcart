@@ -1,7 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import { AddToCartStore } from "../../Store/addToCart-Store";
+import { useContext } from "react";
+import { addToCart } from "../../services/poducts";
 
-export function ProductCard({product}){
-  const Navigate = useNavigate()
+export function ProductCard({product})
+{
+  const [cartItems, setCartItems] = useContext(AddToCartStore);
+  const handleAddToCart = async(productId) => {
+    try {
+      const response = await addToCart(productId);
+      // setCartItems([...cartItems, response.data.cart.products[response.data.cart.products.length - 1]]);
+      setCartItems(response.data.cart.products);
+      console.log("Product added to cart");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
+
+  const Navigate = useNavigate();
   const handleImageClick = async(id) => {
     try{
     Navigate(`/product/${id}`)
@@ -43,7 +59,7 @@ export function ProductCard({product}){
 
           {/* Actions */}
           <div className="card-actions justify-between mt-4 gap-2">
-            <button className="btn btn-outline btn-sm flex-1">Add to Cart</button>
+            <button onClick={()=>{handleAddToCart(product._id)}} className="btn btn-outline btn-sm flex-1">Add to Cart</button>
             <button className="btn btn-primary btn-sm flex-1">Buy Now</button>
           </div>
         </div>

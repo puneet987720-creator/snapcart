@@ -1,12 +1,24 @@
 // ProductDetail.jsx
 import React from "react";
 import { useParams } from "react-router-dom";
-import { fetchProductById } from "../../services/poducts";
-import { useEffect, useState } from "react";
+import { fetchProductById, addToCart } from "../../services/poducts";
+import { useEffect, useState, useContext } from "react";
+import { AddToCartStore } from "../../Store/addToCart-Store";
 
 export function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [cartItems, setCartItems] = useContext(AddToCartStore);
+
+  const handleAddToCart = async (productId) => {
+    try {
+      await addToCart(productId);
+      setCartItems([...cartItems, productId]);
+      console.log("Product added to cart");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -17,7 +29,6 @@ export function ProductDetail() {
         console.error('Error fetching product details:', error);
       }
     };
-
     fetchProduct();
   }, [id]);
 
@@ -50,7 +61,7 @@ export function ProductDetail() {
 
           {/* Actions */}
           <div className="card-actions justify-between mt-4">
-            <button className="btn btn-outline btn-primary">Add to Cart</button>
+            <button onClick={() => handleAddToCart(product._id)} className="btn btn-outline btn-primary">Add to Cart</button>
             <button className="btn btn-primary">Buy Now</button>
           </div>
         </div>

@@ -54,6 +54,7 @@ exports.getProductById = async (req, res) => {
 exports.getProductsByIds = async (req, res) => {
   try {
     const { ids } = req.body; // expecting { ids: ["id1", "id2", "id3"] }
+    console.log("Received product IDs:", ids);
 
     // Validate input
     if (!Array.isArray(ids) || ids.length === 0) {

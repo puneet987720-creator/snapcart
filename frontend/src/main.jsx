@@ -6,6 +6,7 @@ import { NotFound404 } from './components/pages/404Page.jsx';
 
 import {authRoutes} from './router/auth-routes.jsx';
 import { productRoutes } from './router/productRoutes.jsx';
+import { cartRoutes } from './router/cartRoutes.jsx';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css'
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
         element: <NotFound404 />,
       },
       ...authRoutes,
-      ...productRoutes
+      ...productRoutes,
+      ...cartRoutes
     ],
   },
 ]);
