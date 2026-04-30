@@ -1,23 +1,28 @@
 # snapcart
-1. Project Title & Description
+<h1>1. Project Title & Description</h1>
+
 Snapcart — A MERN stack e‑commerce demo project with Razorpay payment gateway integration.
 
 Briefly explain what the project does (shopping cart, checkout flow, responsive UI).
 
-2. Features
-🛒 Add/remove products to cart
+<h1>2. Features</h1>
+<ul>
+<li>🛒 Add/remove products to cart</li>
 
-📦 Checkout flow with delivery address
+<li>📦 Checkout flow with delivery address</li>
 
-💳 Razorpay payment gateway integration (sandbox mode)
+<li>💳 Razorpay payment gateway integration (sandbox mode)</li>
 
-📧 Order confirmation flow
+<li>📧 Order confirmation flow</li>
 
-🎨 Responsive UI with Tailwind + DaisyUI
+<li>🎨 Responsive UI with Tailwind + DaisyUI</li>
+</ul>
+<h1>3. Tech Stack</h1>
+<ul>
+<li>Frontend: React, Redux Toolkit, Tailwind CSS, DaisyUI</li>
 
-3. Tech Stack
-Frontend: React, Redux Toolkit, Tailwind CSS, DaisyUI
+<li>Backend: Node.js, Express.js, MongoDB</li>
 
-Backend: Node.js, Express.js, MongoDB
+<li>Payments: Razorpay API integration</li>
 
-Payments: Razorpay API integration
+</ul>
