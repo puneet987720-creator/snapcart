@@ -74,7 +74,7 @@ export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEm
 
     return (
         <div className="flex justify-center items-start pt-24"> {/* pushes below navbar */}
-            <div className="card bg-base-100 shadow-2xl w-96 h-[500px] flex flex-col justify-between">
+            <div className="card bg-base-100 shadow-2xl w-96 h-115 flex flex-col justify-between">
                 <div className="card-body">
                     <h3 className="card-title text-xl font-bold">Order Summary</h3>
                     <div className="space-y-2 text-sm">
