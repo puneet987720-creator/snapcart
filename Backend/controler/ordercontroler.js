@@ -91,7 +91,7 @@ exports.verifyPaymentAndCreateOrder = async (req, res) => {
 // Create Order (for COD or other methods)
 exports.createOrder = async (req, res) => {
     try {
-        const { products, totalPrice, deliveryAddress, paymentInfo } = req.body;
+        const { products, totalPrice, deliveryAddress} = req.body;
             const authenticatedUserId = req.session.auth.id;
             if (!authenticatedUserId) {
                 return res.status(401).json({ message: 'Unauthorized' });
@@ -101,12 +101,15 @@ exports.createOrder = async (req, res) => {
             products,
             totalPrice,
             deliveryAddress,
-            paymentInfo
+            paymentInfo: {
+                method: 'cash_on_delivery',
+                transactionId: 'COD_' + Date.now()
+            }
         });
         const savedOrder = await newOrder.save();
-        res.status(201).json(savedOrder);
+        res.status(201).json({ success: true, message: 'Order placed successfully', orderId: savedOrder._id });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Failed to create order', error: error.message });
     }
 };
 

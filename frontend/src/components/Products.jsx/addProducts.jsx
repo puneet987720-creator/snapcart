@@ -1,9 +1,16 @@
-import {Form, redirect} from "react-router-dom";
+import { useContext } from "react";
+import { LoginStateStore } from "../../Store/loginState-store";
+import {Form, redirect, useActionData} from "react-router-dom";
 import { addProduct } from "../../services/poducts";
 
 export function AddProductForm() {
+  const {IsLoggedIn, setIsLoggedIn, userDetails, setuserDetails} = useContext(LoginStateStore);
+  const actionData = useActionData();
+  if(!IsLoggedIn || userDetails.usertype !== "admin"){
+    return <div className="text-center mt-20">Access Denied</div>
+  }
   return (
-    <Form method="POST">
+    <Form method="POST" encType="multipart/form-data">
 
   <div className="hero bg-base-200 min-h-screen">
     <div className="hero-content flex-col lg:flex-row-reverse">
@@ -12,6 +19,11 @@ export function AddProductForm() {
       <div className="text-center lg:text-left">
         <h1 className="text-5xl font-bold">Add Product</h1>
       </div>
+      {actionData?.error && (
+        <div className="alert alert-error mt-4">
+          <span>{actionData.error}</span>
+        </div>
+      )}
           <fieldset className="fieldset grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Product Name */}
@@ -23,7 +35,7 @@ export function AddProductForm() {
             {/* Description */}
             <div className="form-control">
               <label className="label">Description</label>
-              <textarea name="description" className="textarea textarea-bordered" placeholder="Optional"></textarea>
+              <textarea name="description" className="textarea textarea-bordered" placeholder="Required"></textarea>
             </div>
 
             {/* Price */}
@@ -56,7 +68,7 @@ export function AddProductForm() {
             {/* Image Upload */}
             <div className="form-control col-span-2">
               <label className="label">Product Image</label>
-              <input type="file" name="image" className="file-input file-input-bordered w-full" />
+              <input type="file" name="image" accept="image/png, image/jpg, image/jpeg" className="file-input file-input-bordered w-full" />
             </div>
           </fieldset>
 
@@ -75,15 +87,18 @@ export function AddProductForm() {
 
 export async function createProductAction({ request }) {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  console.log(data);
 
   try {
-    const response = await addProduct(data);
+    const response = await addProduct(formData);
     console.log('Product created successfully:', response.data);
+    return redirect('/product');
 
   } catch (error) {
-    console.error('Error creating product:', error);
+    const message = error?.response?.data?.message || error?.message || 'Product creation failed';
+    console.error('Error creating product:', message);
+    return new Response(JSON.stringify({ error: message }),
+     { status: error?.response?.status || 400,
+      headers: { "Content-Type": "application/json" } }
+    );
   }
-  return redirect('/product');
 }

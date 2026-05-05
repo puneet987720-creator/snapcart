@@ -1,4 +1,4 @@
-# snapcart
+# SNAPCART
 <h1>1. Project Title & Description</h1>
 
 Snapcart — A MERN stack e‑commerce demo project with Razorpay payment gateway integration.

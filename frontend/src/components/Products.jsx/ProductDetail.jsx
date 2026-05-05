@@ -41,11 +41,12 @@ export function ProductDetail() {
       <div className="card bg-base-100 w-full max-w-3xl shadow-md">
         <figure>
           <img
-            src={product.image}
+            src={`http://localhost:3000/uploads/${product.image}`}
             alt={product.name}
-            className="h-80 w-full object-cover"
+            className="w-full h-96 object-contain"
           />
         </figure>
+
         <div className="card-body">
           {/* Product Name */}
           <h2 className="card-title text-2xl">{product.name}</h2>

@@ -5,6 +5,7 @@ import {
     loadRazorpayScript,
     openRazorpayCheckout
 } from '../../services/paymentService';
+import { placeOrder } from '../../services/order';
 
 export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEmail, userName, userPhone }) => {
     const [loading, setLoading] = useState(false);
@@ -72,6 +73,23 @@ export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEm
         );
     }
 
+    const handleCashOnDelivery = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await placeOrder(cartItems, totalPrice, deliveryAddress);
+            console.log("Order placed successfully:", response);
+            if (response.success) {
+                setSuccess(true);
+            } else {
+                setError(response.message || "Failed to place order");
+            }
+        } catch (err) {
+            const errorMessage = err?.response?.data?.message || err?.message || "Error placing order";
+            setError(errorMessage);
+        }
+        setLoading(false);
+    };
     return (
         <div className="flex justify-center items-start pt-24"> {/* pushes below navbar */}
             <div className="card bg-base-100 shadow-2xl w-96 h-115 flex flex-col justify-between">
@@ -97,6 +115,13 @@ export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEm
                         className={`btn btn-primary w-full ${loading ? "loading" : ""}`}
                     >
                         {loading ? "Processing..." : "Pay with Razorpay"}
+                    </button>
+                    <button
+                        onClick={handleCashOnDelivery}
+                        disabled={loading}
+                        className={`btn btn-secondary w-full ${loading ? "loading" : ""}`}
+                    >
+                        {loading ? "Processing..." : "Place Order (Cash on Delivery)"}
                     </button>
                 </div>
             </div>

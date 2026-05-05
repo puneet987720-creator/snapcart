@@ -10,7 +10,13 @@ export const fetchProducts = () => API.get('/all');
 
 export const fetchProductById = (id) => API.get(`/details/${id}`);
 
-export const addProduct = (productData) => API.post('/add', productData);
+export const addProduct = (productData) => {
+  return API.post('/add', productData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+};
 
 export const searchProducts = (searchTerm) => API.get(`/search?query=${searchTerm}`);
 

@@ -83,9 +83,9 @@ export const CartPage = () => {
               >
                 <figure>
                   <img
-                    src={item.img}
+                    src={`http://localhost:3000/uploads/${item.productId.image}`}
                     alt={item.productId.name}
-                    className="w-full h-40 object-cover rounded"
+                    className="w-full h-auto object-cover rounded"
                   />
                 </figure>
                 <div className="card-body">
