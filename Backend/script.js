@@ -7,7 +7,7 @@ dotenv.config();
 const session = require("express-session");
 const mongodbStore = require("connect-mongodb-session")(session);
 const db_path = process.env.DATA_URL;
-const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+const clientUrl = process.env.CLIENT_URL;
 const sessionSecret = process.env.SESSION_SECRET || "e-commerce site";
 const isProduction = process.env.NODE_ENV === "production";
 const { default: mongoose } = require("mongoose");

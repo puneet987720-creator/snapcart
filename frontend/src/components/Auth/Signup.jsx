@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
 import { createUser } from "../../services/authorization";
+import {Loader} from "../pages/loader";
 
 export function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const actionData = useActionData();
 
   const handleSubmit = (event) => {
     if (password !== confirmPassword) {
       event.preventDefault();
       setPasswordError(true);
+      setLoading(false);
     } else {
       setPasswordError(false);
+      setLoading(true);
     }
   };
 
+ useEffect(() => {
+    if (actionData?.error) {
+      setLoading(false);
+    }
+  }, [actionData]);
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <div className="hero bg-base-200 min-h-screen pt-24">
@@ -79,7 +88,7 @@ export function SignupForm() {
                     <input type="radio" aria-label="Admin" name="usertype" value="admin" className="btn" />
                   </div>
                 </div>
-                <button type="submit" className="btn btn-neutral mt-4">Signup</button>
+                <button disabled={loading} type="submit" className="btn btn-neutral mt-4">Signup{loading && <Loader />}</button>
               </fieldset>
             </div>
           </div>
