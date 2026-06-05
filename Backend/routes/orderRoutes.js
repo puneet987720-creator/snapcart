@@ -9,7 +9,7 @@ router.post('/verify-payment', orderController.verifyPaymentAndCreateOrder)
 
 // Existing order endpoints
 router.post('/place-order', orderController.createOrder)
-router.get('/user/:userId', orderController.getUserOrders)
+router.get('/orders/:userId', orderController.getUserOrders)
 router.get('/placed-order-detail/:orderId', orderController.getOrderById)
 router.put('/update/:orderId', orderController.updateOrderStatus)
 router.delete('/delete/:orderId', orderController.deleteOrder)

@@ -16,3 +16,8 @@ export const fetchUserOrders = async (userId) => {
     const response = await API.get(`/orders/${userId}`);
     return response.data;
 };
+
+export const fetchOrderById = async (orderId) => {
+    const response = await API.get(`/placed-order-detail/${orderId}`);
+    return response.data;
+};
