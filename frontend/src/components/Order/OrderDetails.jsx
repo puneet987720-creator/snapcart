@@ -1,23 +1,42 @@
 import { useEffect, useState } from "react";
+import { redirect, NavLink } from "react-router-dom";
 import { fetchOrderById } from "../../services/order";
 import { useParams } from "react-router-dom";
 import { UPLOADS_URL } from "../../services/apiConfig";
+import { updateOrderStatus } from "../../services/order";
+import { deleteOrder } from "../../services/order";
 
 export const OrderDetails = () => {
     const { orderId } = useParams();
     const [order, setOrder] = useState(null);
 
+    const handleStatusUpdate = async (newStatus) => {
+        try {
+            const response = await updateOrderStatus(orderId, newStatus);
+            setOrder(response);
+        } catch (error) {
+            console.error("Error updating order status:", error);
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            await deleteOrder(orderId);
+            redirect("/my-orders");
+        } catch (error) {
+            console.error("Error deleting order:", error);
+        }
+    }
+
     useEffect(() => {
         const fetchOrder = async () => {
             try {
                 const response = await fetchOrderById(orderId);
-                console.log("Fetched order details:", response);
                 setOrder(response);
             } catch (error) {
                 console.error("Error fetching order details:", error);
             }
         };
-
         fetchOrder();
     }, [orderId]);
     if (!order) {
@@ -25,7 +44,7 @@ export const OrderDetails = () => {
     }
 
     return (
-        <div className="min-h-screen bg-base-200 text-base-content">
+        <div className="min-h-screen bg-base-200 text-base-content flex flex-col">
             <div className="container mx-auto px-4 py-10">
                 <h2 className="text-2xl font-bold mb-4">Order Details</h2>
                 <div className="card bg-base-100 shadow-xl">
@@ -111,6 +130,38 @@ export const OrderDetails = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="container mx-auto px-4 pb-6 flex justify-between">
+                <NavLink to="/my-orders"  >
+                {(order.status == "delivered" || order.status == "cancelled") && (
+                    <button
+                        onClick={handleDelete}
+                        className="btn btn-outline btn-error btn-lg"
+                    >
+                        Delete Order
+                    </button>
+                )}
+                </NavLink>
+                {(order.status == "pending")&& (
+                    <button
+                        onClick={() => document.getElementById(`product_modal_${order._id}`).showModal()}
+                        className="btn btn-error btn-lg"
+                    >
+                        Cancel Order
+                    </button>
+                )}
+                    <dialog id={`product_modal_${order._id}`} className="modal modal-bottom sm:modal-middle">
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Cancel Order</h3>
+                        <p className="py-4">Are you sure you want to cancel this order?</p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            <button className="btn">Cancel</button>
+                            <a onClick={async () => await handleStatusUpdate("cancelled").then(()=>{ window.location.reload(); })} className="btn btn-error">Cancel Order</a>
+                          </form>
+                        </div>
+                      </div>
+                    </dialog>
             </div>
         </div>
     );

@@ -21,3 +21,18 @@ export const fetchOrderById = async (orderId) => {
     const response = await API.get(`/placed-order-detail/${orderId}`);
     return response.data;
 };
+
+export const updateOrderStatus = async (orderId, status) => {
+    const response = await API.put(`/update-order/${orderId}`, { status });
+    return response.data;
+};
+
+export const deleteOrder = async (orderId) => {
+    const response = await API.delete(`/delete-order/${orderId}`);
+    return response.data;
+}
+
+export const fetchAllOrders = async () => {
+    const response = await API.get('/all-placed-orders');
+    return response.data;
+};

@@ -8,7 +8,6 @@ export const UserOrder = () => {
     const [orders, setOrders] = useState([]);
     const getUserOrders = async () => {
         try{
-            console.log(userDetails.id);
             const response = await fetchUserOrders(userDetails.id);
             setOrders(response);
         }

@@ -11,8 +11,8 @@ router.post('/verify-payment', orderController.verifyPaymentAndCreateOrder)
 router.post('/place-order', orderController.createOrder)
 router.get('/orders/:userId', orderController.getUserOrders)
 router.get('/placed-order-detail/:orderId', orderController.getOrderById)
-router.put('/update/:orderId', orderController.updateOrderStatus)
-router.delete('/delete/:orderId', orderController.deleteOrder)
+router.put('/update-order/:orderId', orderController.updateOrderStatus)
+router.delete('/delete-order/:orderId', orderController.deleteOrder)
 router.get('/all-placed-orders', orderController.getAllOrders)
 
 module.exports = router

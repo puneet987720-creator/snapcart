@@ -1,4 +1,5 @@
 import { useContext} from "react";
+import { NavLink } from "react-router-dom";
 import { LoginStateStore } from "../../Store/loginState-store";
 
 export function AdminPage() {
@@ -39,7 +40,16 @@ export function AdminPage() {
                             <h2 className="card-title">Add Product</h2>
                             <p className="text-sm sm:text-base">Manage and add new products to your store.</p>
                             <div className="card-actions justify-end">
-                                <a href="/product/new" className="btn btn-primary btn-sm sm:btn-md">Add</a>
+                                <NavLink to="/product/new" className="btn btn-primary btn-sm sm:btn-md">Add</NavLink>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className="card-title">Manage Orders</h2>
+                            <p className="text-sm sm:text-base">View and manage all placed orders.</p>
+                            <div className="card-actions justify-end">
+                                <NavLink to="/all-orders" className="btn btn-primary btn-sm sm:btn-md">View Orders</NavLink>
                             </div>
                         </div>
                     </div>
