@@ -1,6 +1,7 @@
 const { ObjectId } = require('mongodb');
 const dotenv = require('dotenv')
 dotenv.config()
+const mongoose = require('mongoose')
 const Auth = require('../models/auth')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')

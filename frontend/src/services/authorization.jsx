@@ -34,3 +34,8 @@ export const checkLoginStatus = async () => {
     const response = await API.get('/loginStatus');
     return response;
 }
+
+export const getUserById = async (userId) => {
+    const response = await API.get(`/user/${userId}`);
+    return response.data
+}
