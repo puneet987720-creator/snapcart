@@ -28,13 +28,10 @@ export function ProfilePage() {
             <p><span className="font-bold">Email:</span> {userDetails.email}</p>
             <p><span className="font-bold">User Type:</span> {userDetails.usertype}</p>
           </div>
-          <div className="card-actions justify-end mt-4">
-            <button className="btn btn-secondary btn-sm sm:btn-md">Edit</button>
-          </div>
         </div>
       </div>
 
-      {/* User Profile */}
+      {/* User Profile
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">User Profile</h2>
@@ -45,7 +42,6 @@ export function ProfilePage() {
         </div>
       </div>
 
-      {/* Security */}
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Security</h2>
@@ -56,7 +52,7 @@ export function ProfilePage() {
         </div>
       </div>
 
-      {/* Notifications */}
+
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Notifications</h2>
@@ -65,7 +61,7 @@ export function ProfilePage() {
             <button className="btn btn-info btn-sm sm:btn-md">Configure</button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   </div>
 </div>

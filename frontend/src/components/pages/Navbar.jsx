@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddToCart } from "./addToCartButton";
 import { Sidebar } from "./Sidebar";
@@ -10,7 +9,10 @@ import { searchProducts } from "../../services/poducts";
 
 export function Navbar() {
   const Navigate = useNavigate()
-  const {IsLoggedIn, setIsLoggedIn, userDetails, setuserDetails} = useContext(LoginStateStore);
+  const { IsLoggedIn, setIsLoggedIn, userDetails, setuserDetails } = useContext(LoginStateStore);
+  const logoutDialogRef = useRef(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState("");
   const [searchTerm, setSearchTerm, searchResults, setSearchResults, filterResult, setFilterResult] = useContext(FilterProductStore);
   const handleSearch = async () => {
     const response = await searchProducts(searchTerm);
@@ -18,8 +20,23 @@ export function Navbar() {
     setSearchResults(result);
     Navigate(`/search?query=${searchTerm}`)
   }
-  const handleLogoutClick = () => {
-    window.location.reload(); // Reloads the entire page
+  const handleLogoutClick = async () => {
+    setIsLoggingOut(true);
+    setLogoutError("");
+    try {
+      await logoutUser();
+      setIsLoggedIn(false);
+      setuserDetails(null);
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userDetails");
+      logoutDialogRef.current?.close();
+      Navigate("/");
+    } catch (error) {
+      console.error("Error logging out:", error);
+      setLogoutError(error.response?.data?.message || "Could not log out. Please try again.");
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
   return (
     <>
@@ -63,20 +80,9 @@ export function Navbar() {
                   )}
                   <li><a href="/settings">Settings</a></li>
                   <li>
-                    <a onClick={() => document.getElementById('my_modal_5').showModal()}>Logout</a>
-                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-                      <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
-                        <p className="py-4">Are you sure you want to logout?</p>
-                        <div className="modal-action">
-                          <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn">cancel</button>
-                            <a href="/" className="btn btn-primary" onClick={async () => await logoutUser().then(() => handleLogoutClick())}>Logout</a>
-                          </form>
-                        </div>
-                      </div>
-                    </dialog>
+                    <button type="button" onClick={() => logoutDialogRef.current?.showModal()}>
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -84,6 +90,21 @@ export function Navbar() {
           </div>
         </div>
       </div>
+      <dialog ref={logoutDialogRef} className="modal modal-bottom sm:modal-middle" aria-labelledby="logout-dialog-title">
+        <div className="modal-box">
+          <h3 id="logout-dialog-title" className="font-bold text-lg">Confirm logout</h3>
+          <p className="py-4">Are you sure you want to logout?</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn" disabled={isLoggingOut}>Cancel</button>
+              <button type="button" className="btn btn-primary" onClick={handleLogoutClick} disabled={isLoggingOut}>
+                {isLoggingOut ? "Logging out…" : "Logout"}
+              </button>
+            </form>
+          </div>
+          {logoutError && <p className="text-error" role="alert">{logoutError}</p>}
+        </div>
+      </dialog>
     </>
   )
 }
