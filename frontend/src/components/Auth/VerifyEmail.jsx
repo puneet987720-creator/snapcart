@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, redirect } from 'react-router-dom';
 import { verifyEmail } from "../../services/authorization";
 
 export function VerifyEmail() {
@@ -11,6 +11,9 @@ const verify = async () => {
       try {
         await verifyEmail(token);
         setIsVerified("Email verified successfully!");
+        setTimeout(() => {
+          redirect("/login");
+        }, 2000);
       } catch (error) {
         console.error('Error verifying email:', error);
         setIsVerified("Failed to verify email.");
