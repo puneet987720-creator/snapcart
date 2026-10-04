@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 export const OrderCard = ({ order }) => {
-    console.log("Order data in OrderCard:", order);
+    // console.log("Order data in OrderCard:", order);
     return (
         <>
         <NavLink to={`/order-details/${order._id}`} className="block">

@@ -21,7 +21,7 @@ async function verifyEmail(email, token) {
       },
       to: [{ email: email }]
     })
-    console.log('Verification email sent: %s', result.messageId)
+    // console.log('Verification email sent: %s', result.messageId)
   }catch(error){
     console.error('Error sending verification email:', error)
     throw error

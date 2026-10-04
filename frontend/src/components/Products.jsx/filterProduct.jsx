@@ -18,7 +18,7 @@ export function FilterPage() {
   const handleCategory = async() => {
     const CategoryString = await selectedCategories.join(",")
     const brandString = await selectedBrands.join(",")
-    console.log('filter',CategoryString,selectedBrands,minPrice,maxPrice)
+    // console.log('filter',CategoryString,selectedBrands,minPrice,maxPrice)
    const response = await filterProduct(CategoryString,brandString,minPrice,maxPrice)    
    setFilterResult(response.data.products)
    Navigate('/filtered-product')

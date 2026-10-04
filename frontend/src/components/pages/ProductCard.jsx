@@ -14,7 +14,7 @@ export function ProductCard({ product }) {
       const response = await addToCart(productId);
       // setCartItems([...cartItems, response.data.cart.products[response.data.cart.products.length - 1]]);
       setCartItems(response.data.cart.products);
-      console.log("Product added to cart");
+      // console.log("Product added to cart");
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }

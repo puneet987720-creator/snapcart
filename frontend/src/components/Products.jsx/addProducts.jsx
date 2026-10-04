@@ -91,7 +91,7 @@ export async function createProductAction({ request }) {
 
   try {
     const response = await addProduct(formData);
-    console.log('Product created successfully:', response.data);
+    // console.log('Product created successfully:', response.data);
     return redirect('/product');
 
   } catch (error) {

@@ -125,7 +125,7 @@ exports.loginStatus = (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     req.session.destroy(err => {
         if (err) {
             console.error('Error destroying session:', err)

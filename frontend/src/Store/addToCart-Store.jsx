@@ -12,15 +12,15 @@ export const AddToCartStoreProvider = ({ children }) => {
                 const response = await getCart();
                 setCartItems(response.data.products);
                 setGrossTotal(response.data.grossTotal);
-                console.log("Cart data", response.data.products.length);
+                // console.log("Cart data", response.data.products.length);
             } catch (error) {
                 console.error("Error fetching cart:", error);
             }
         };
         fetchCart();
     }, []);
-    console.log("cartItems:", cartItems);
-    console.log("grossTotal:", grossTotal);
+    // console.log("cartItems:", cartItems);
+    // console.log("grossTotal:", grossTotal);
     return (
         <AddToCartStore.Provider value={[ cartItems, setCartItems, grossTotal, setGrossTotal ]}>
             {children}

@@ -101,11 +101,11 @@ export function SignupForm() {
 export async function createUserAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
+  // // console.log(data);
 
   try {
     const response = await createUser(data);
-    console.log('User created successfully:', response.data);
+    // // console.log('User created successfully:', response.data);
 
   } catch (error) {
     const message = error?.response?.data?.message || error?.message || 'Login failed';

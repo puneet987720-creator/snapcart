@@ -14,8 +14,8 @@ exports.addProduct = async (req, res) => {
     const { name, description, price, category, brand, stock } = req.body;
     const imageFile = req.file;
 
-    console.log('Request body:', req.body);
-    console.log('Image file:', imageFile);
+    // console.log('Request body:', req.body);
+    // console.log('Image file:', imageFile);
 
     if (!imageFile) {
       return res.status(422).json({ message: "IMAGE FORMAT MUST BE PNG,JPG,JPEG" });
@@ -73,7 +73,7 @@ exports.getProductById = async (req, res) => {
 exports.getProductsByIds = async (req, res) => {
   try {
     const { ids } = req.body; // expecting { ids: ["id1", "id2", "id3"] }
-    console.log("Received product IDs:", ids);
+    // console.log("Received product IDs:", ids);
 
     // Validate input
     if (!Array.isArray(ids) || ids.length === 0) {

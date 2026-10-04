@@ -17,8 +17,7 @@ return (
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
       <p className="mb-5">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
+        Welcome to our e-commerce store, where quality products meet unbeatable value. Browse a wide range of carefully selected items, enjoy a smooth shopping experience, and find everything you need in one convenient place.
       </p>
       <a href="/product" className="btn btn-primary">Get Started</a>
     </div>

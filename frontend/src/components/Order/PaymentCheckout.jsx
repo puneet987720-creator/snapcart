@@ -42,7 +42,7 @@ export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEm
 
                         if (verifyResponse.success) {
                             setSuccess(true);
-                            console.log("Payment successful! Order ID:", verifyResponse.orderId);
+                            // console.log("Payment successful! Order ID:", verifyResponse.orderId);
                         } else {
                             setError("Payment verification failed");
                         }
@@ -78,8 +78,8 @@ export const PaymentCheckout = ({ cartItems, totalPrice, deliveryAddress, userEm
             setLoading(true);
             setError(null);
             const response = await placeOrder(cartItems, totalPrice, deliveryAddress);
-            console.log("Order placed successfully:", response);
             if (response.success) {
+                // console.log("Order placed successfully:", response);
                 setSuccess(true);
             } else {
                 setError(response.message || "Failed to place order");

@@ -41,7 +41,7 @@ export const OrderDetailsAdmin = () => {
     const User = async (userId) => {
         try {
             const response = await getUserById(userId);
-            console.log("User details:", response);
+            // console.log("User details:", response);
             setGetUser(response);
             return response;
         } catch (error) {

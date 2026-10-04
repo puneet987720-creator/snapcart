@@ -5,7 +5,7 @@ import { ProductCard } from "../pages/ProductCard"
 export function FilteredProduct(){
 const [ searchTerm, setSearchTerm, searchResults, setSearchResults, filterResult, setFilterResult ] = useContext(FilterProductStore);
 let product = filterResult
-console.log(`product${product}`)
+// console.log(`product${product}`)
 return(
 <>
     <div className="mt-20 p-4 flex justify-center">

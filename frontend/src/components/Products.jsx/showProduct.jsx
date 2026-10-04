@@ -11,7 +11,7 @@ export function ShowProduct() {
         try {
             const response = await fetchProducts();
             const productList = response.data.products;
-            console.log('Fetched products:', productList);
+            // console.log('Fetched products:', productList);
             setProducts(productList);
             setLoading(false);
         } catch (error) {

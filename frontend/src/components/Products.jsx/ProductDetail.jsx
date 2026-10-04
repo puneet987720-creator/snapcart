@@ -15,7 +15,7 @@ export function ProductDetail() {
     try {
       await addToCart(productId);
       setCartItems([...cartItems, productId]);
-      console.log("Product added to cart");
+      // console.log("Product added to cart");
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }

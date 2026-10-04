@@ -46,7 +46,7 @@ export const CartPage = () => {
     if(response.status === 200){
       setCartItems(response.data.cart.products);
     }
-    console.log("Delete:", item);
+    // console.log("Delete:", item);
   };
 
   const handleClearCart = async() => {
@@ -54,7 +54,7 @@ export const CartPage = () => {
     if(response.status === 200){
       setCartItems([]);
     }
-    console.log("Clear Cart");
+    // console.log("Clear Cart");
   };
 
   return (

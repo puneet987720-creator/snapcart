@@ -106,7 +106,7 @@ export async function updateProductAction({ request, params }) {
   const id = params.id;
   try {
     const response = await updateProduct(id, formData);
-    console.log('Product updated successfully:', response.data);
+    // console.log('Product updated successfully:', response.data);
     return redirect('/product');
 
   } catch (error) {

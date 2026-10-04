@@ -22,7 +22,7 @@ export const LoginStateStoreProvider = ({ children }) => {
           let userDetails = response.data.user
           setuserDetails(userDetails);
           localStorage.setItem('userDetails', JSON.stringify(userDetails));
-          console.log("userDetails from server", userDetails);
+          // console.log("userDetails from server", userDetails);
           setIsLoggedIn(loginState);
           localStorage.setItem('isLoggedIn', JSON.stringify(loginState));
         } catch (error) {
